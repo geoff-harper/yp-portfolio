@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>yp-portfolio</title>
+    <style>
+      li {
+        list-style: none;
+        background: rgba(0, 0, 0, 0.02);
+        padding: 20px;
+        flex-basis: 20%;
+        display: block;
+        margin-bottom: 20px;
+      }
+      ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        width: 1200px;
+      }
+      .shrink-enter-active, .shrink-leave-active {
+        transition: opacity .5s
+      }
+      .shrink-enter, .shrink-leave-to {
+        opacity: 0
+      }
+      .site-example {
+        transition: all 0.5s;
+        display: inline-block;
+      }
+      .site-example-enter, .site-example-leave-to {
+        opacity: 0;
+      }
+      .site-example-leave-active {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="portfolio"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
