@@ -1,13 +1,12 @@
 <template>
-  <!-- <ul class="results-list"> -->
   <transition-group name="site-example" tag="ul" class="results-list">
     <Site
       v-for="portfolio of filteredSites"
       :key="portfolio.id"
       :portfolio="portfolio"
     ></Site>
+    <li class="no-results" v-if="filteredSites.length === 0" :key="portfolios.length + 1">We couldn't find anything, please expand your search.</li>
   </transition-group>
-  <!-- </ul> -->
 </template>
 
 <script>

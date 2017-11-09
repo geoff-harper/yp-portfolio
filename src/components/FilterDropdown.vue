@@ -1,8 +1,8 @@
 <template>
-  <fieldset class="filter-category">
-    <h3 class="subtitle"><slot>Category</slot></h3>
-    <transition name="shrink">
-      <div class="filter-option__container" v-show="filtersVisible">
+  <transition name="fade">
+    <fieldset class="filter-category" v-show="filtersVisible">
+      <h3 class="subtitle"><slot>Category</slot></h3>
+      <div class="filter-option__container">
         <label v-for="(category, i) of displayFilters" key="i" :for="getId(i)" class="filter-option__label">
           <input
             class="filter-option__checkbox"
@@ -14,14 +14,22 @@
           {{ category }}
         </label>
       </div>
-    </transition>
-  </fieldset>
+    </fieldset>
+  </transition>
 </template>
 
 <script>
 export default {
   name: 'FilterDropdown',
+  model: {
+    prop: 'checkedBoxes',
+    event: 'change'
+  },
   props: {
+    checkedBoxes: {
+      type: Array,
+      required: true
+    },
     displayFilters: {
       type: Array,
       required: true
@@ -35,18 +43,20 @@ export default {
   },
   methods: {
     emitFilters () {
-      this.$emit('toggle', this.checkedCategories, this.idText)
+      this.$emit('change', this.checkedCategories, this.idText)
     },
     getId (i) {
       return `${this.idText}-${i}`
     }
   },
-  computed: {
-
+  watch: {
+    checkedBoxes () {
+      this.checkedCategories = this.checkedBoxes
+    }
   },
   data () {
     return {
-      checkedCategories: []
+      checkedCategories: this.checkedBoxes
     }
   }
 }

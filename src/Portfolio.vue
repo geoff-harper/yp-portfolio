@@ -3,29 +3,29 @@
     <section class="filter-section">
       <form>
         <FilterDropdown
-          v-model="updateSites"
+          v-model="activeFilters.vertical"
           :filtersVisible="filtersVisible"
           :displayFilters="displayFilters.vertical"
           idText="vertical">Type of Business</FilterDropdown>
         <FilterDropdown
-          v-model="updateSites"
+          v-model="activeFilters.language"
           :filtersVisible="filtersVisible"
           :displayFilters="displayFilters.language"
           idText="language">Language</FilterDropdown>
         <FilterDropdown
-          v-model="updateSites"
+          v-model="activeFilters.features"
           :filtersVisible="filtersVisible"
           :displayFilters="displayFilters.features"
           idText="features">Website Features</FilterDropdown>
         <FilterDropdown
-          v-model="updateSites"
+          v-model="activeFilters.colour"
           :filtersVisible="filtersVisible"
           :displayFilters="displayFilters.colour"
           idText="colour">Colour</FilterDropdown>
       </form>
       <div class="filter-buttons__container">
         <button class="filter-toggle" @click="filtersVisible = !filtersVisible">{{ filtersVisible ? "Hide" : "Show" }} filters</button>
-        <button class="filter-reset" @click="clearFilters">Reset filters</button>
+        <button class="filter-reset" @click="resetFilters">Reset filters</button>
       </div>
     </section>
     <section class="results-section">
@@ -50,7 +50,7 @@ export default {
     updateSites (sites, category) {
       this.activeFilters[category] = sites
     },
-    clearFilters () {
+    resetFilters () {
       this.activeFilters = {
         vertical: [],
         language: [],
