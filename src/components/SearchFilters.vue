@@ -10,9 +10,6 @@
     <FilterDropdown
       :displayFilters="displayFilters.features"
       idText="features">Website Features</FilterDropdown>
-    <FilterDropdown
-      :displayFilters="displayFilters.colour"
-      idText="colour">Colour</FilterDropdown>
   </form>
 </template>
 
@@ -27,14 +24,12 @@ export default {
       displayFilters: {
         vertical: ['Automotive', 'Commercial and Industrial Services', 'Contractors and Construction', 'Food Services', 'Health, Beauty and Well-Being', 'Home and Maintenance', 'Law and Finance', 'Miscellaneous'],
         language: ['English', 'French', 'Bilingual'],
-        features: ['Blog', 'Catalogue', 'Video Background', 'Parallax Images'],
-        colour: ['Red', 'Green', 'Blue', 'Yellow', 'Purple', 'Orange', 'Pink', 'Black and White', 'Multicoloured']
+        features: ['Blog', 'Catalogue', 'Video Background', 'Parallax Images']
       },
       activeFilters: {
         vertical: [],
         language: [],
-        features: [],
-        colour: []
+        features: []
       }
     }
   },

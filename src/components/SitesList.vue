@@ -1,20 +1,20 @@
 <template>
   <transition-group name="site-example" tag="ul" class="results-list">
-    <Site
-      v-for="portfolio of filteredSites"
-      :key="portfolio.id"
+    <SiteExample
+      v-for="(portfolio, i) of filteredSites"
+      :key="i"
       :portfolio="portfolio"
-    ></Site>
+    ></SiteExample>
     <li class="no-results" v-if="filteredSites.length === 0" :key="portfolios.length + 1">We couldn't find anything, please expand your search.</li>
   </transition-group>
 </template>
 
 <script>
-import Site from './SiteExample'
+import SiteExample from './SiteExample'
 
 export default {
   name: 'SitesList',
-  components: { Site },
+  components: { SiteExample },
   props: {
     portfolios: {
       type: Array,
@@ -26,9 +26,7 @@ export default {
     }
   },
   data () {
-    return {
-
-    }
+    return {}
   },
   computed: {
     filteredSites () {

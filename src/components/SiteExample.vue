@@ -1,7 +1,7 @@
 <template>
   <li class="site-example">
-    <a :href="portfolio.link" target="_blank">
-      <img :src="fullPath" :alt="portfolio.name" class="portfolio-image">
+    <a :href="portfolio.link" target="_blank" rel="noopener">
+      <!-- <img :src="fullPath" :alt="portfolio.name" class="portfolio-image"> -->
       <!-- <h3 class="smallsubtitle">{{ portfolio.name }}</h3> -->
       <!-- <p class="bodytext">{{ portfolio.vertical }}</p> -->
       <p class="smallsubtitle">{{ portfolio.specialty }}</p>
@@ -9,14 +9,14 @@
       <!-- <p class="bodytext">{{ portfolio.features }}</p> -->
       <!-- <p class="bodytext">{{ portfolio.colour }}</p> -->
       <!-- <p class="bodytext">{{ portfolio.language }}</p> -->
-      <div class="mockup-identifier" v-if="portfolio.features.indexOf('Mockup') !== -1">Mockup</div>
+      <!-- <div class="mockup-identifier" v-if="portfolio.features.indexOf('Mockup') !== -1">Mockup</div> -->
     </a>
   </li>
 </template>
 
 <script>
 export default {
-  name: 'Site',
+  name: 'SiteExample',
   props: {
     portfolio: {
       type: Object,
@@ -37,9 +37,7 @@ export default {
     }
   },
   data () {
-    return {
-
-    }
+    return {}
   }
 }
 </script>

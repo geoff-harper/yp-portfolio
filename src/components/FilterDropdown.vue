@@ -11,7 +11,7 @@
             :value="category"
             @change="emitFilters"
             v-model="checkedCategories">
-          {{ category }}
+          <span class="filter-option__span">{{ category }}</span>
         </label>
       </div>
     </fieldset>
