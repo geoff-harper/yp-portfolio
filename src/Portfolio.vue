@@ -1,32 +1,34 @@
 <template>
   <main id='portfolio'>
     <section class="filter-section">
-      <form>
-        <FilterDropdown
-          v-model="activeFilters.verticals"
-          :filtersVisible="filtersVisible"
-          :displayFilters="displayFilters.verticals"
-          idText="verticals">Type of Business</FilterDropdown>
-        <FilterDropdown
-          v-model="activeFilters.languages"
-          :filtersVisible="filtersVisible"
-          :displayFilters="displayFilters.languages"
-          idText="languages">Language</FilterDropdown>
-        <FilterDropdown
-          v-model="activeFilters.features"
-          :filtersVisible="filtersVisible"
-          :displayFilters="displayFilters.features"
-          idText="features">Website Features</FilterDropdown>
-      </form>
-      <div class="filter-buttons__container">
-        <button :class="['filter-toggle', filtersVisible ? 'expanded' : null]" @click="filtersVisible = !filtersVisible">
-          <!-- <img src="/uploads/toggle.png" alt="toggle icon" class="filter-toggle__icon"> -->
-          {{ filtersVisible ? buttonText.hide : buttonText.show }}
-        </button>
-        <button class="filter-reset" @click="resetFilters">
-          <!-- <img src="/uploads/reset.png" alt="reset icon" class="filter-toggle__icon"> -->
-          {{ buttonText.reset }}
-        </button>
+      <div class="container">
+        <form>
+          <FilterDropdown
+            v-model="activeFilters.verticals"
+            :filtersVisible="filtersVisible"
+            :displayFilters="displayFilters.verticals"
+            idText="verticals">Type of Business</FilterDropdown>
+          <FilterDropdown
+            v-model="activeFilters.languages"
+            :filtersVisible="filtersVisible"
+            :displayFilters="displayFilters.languages"
+            idText="languages">Language</FilterDropdown>
+          <FilterDropdown
+            v-model="activeFilters.features"
+            :filtersVisible="filtersVisible"
+            :displayFilters="displayFilters.features"
+            idText="features">Website Features</FilterDropdown>
+        </form>
+        <div class="filter-buttons__container">
+          <button :class="['filter-toggle', filtersVisible ? 'expanded' : null]" @click="filtersVisible = !filtersVisible">
+            <img src="/uploads/toggle.png" alt="toggle icon" class="filter-toggle__icon">
+            {{ filtersVisible ? buttonText.hide : buttonText.show }}
+          </button>
+          <button class="filter-reset" @click="resetFilters">
+            <img src="/uploads/reset.png" alt="reset icon" class="filter-toggle__icon">
+            {{ buttonText.reset }}
+          </button>
+        </div>
       </div>
     </section>
     <section class="results-section">

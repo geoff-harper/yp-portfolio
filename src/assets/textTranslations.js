@@ -7,9 +7,9 @@ module.exports = {
         features: 'Website Features'
       },
       fr: {
-        businessType: 'French placeholder text',
-        language: 'French placeholder text',
-        features: 'French placeholder text'
+        businessType: 'Type d’entreprise',
+        language: 'Langue',
+        features: 'Caractéristiques du site Web'
       }
     },
     verticals: {
@@ -322,8 +322,8 @@ module.exports = {
         catalogue: 'Catalogue'
       },
       fr: {
-        gallery: 'French placeholder text',
-        stickyHeader: 'French placeholder text',
+        gallery: 'Galerie',
+        stickyHeader: 'Menu fixe',
         videoBackground: 'Vidéo d’arrière plan',
         parallax: 'Effet parallaxe',
         blog: 'Blogue',
@@ -338,13 +338,13 @@ module.exports = {
       reset: 'Reset filters'
     },
     fr: {
-      hide: 'French placeholder text',
-      show: 'French placeholder text',
-      reset: 'French placeholder text'
+      hide: 'Masquer les filtres',
+      show: 'Afficher les filtres',
+      reset: 'Réinitialiser les filtres'
     }
   },
   resultsData: {
     en: "We couldn't find anything, please expand your search.",
-    fr: 'French placeholder text'
+    fr: 'Nous n’avons rien trouvé, veuillez étendre votre recherche.'
   }
 }

@@ -3,8 +3,7 @@
     <a :href="portfolio.link" target="_blank" rel="noopener">
       <img :src="fullPath" :alt="portfolio.name" class="portfolio-image">
       <p class="smallsubtitle">{{ subVertical }}</p>
-      <p class="bodytext">{{ getExampleId(portfolio.id, 3) }}</p>
-      
+      <p class="bodytext">{{ getExampleId(portfolio.id, 3) }}</p>  
       <!-- <div class="mockup-identifier" v-if="portfolio.features.indexOf('Mockup') !== -1">Mockup</div> -->
     </a>
   </li>
