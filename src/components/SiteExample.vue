@@ -1,14 +1,8 @@
 <template>
   <li class="site-example">
     <a :href="portfolio.link" target="_blank" rel="noopener">
-      <!-- <img :src="fullPath" :alt="portfolio.name" class="portfolio-image"> -->
-      <!-- <h3 class="smallsubtitle">{{ portfolio.name }}</h3> -->
-      <!-- <p class="bodytext">{{ portfolio.vertical }}</p> -->
-      <p class="smallsubtitle">{{ portfolio.specialty }}</p>
+      <p class="smallsubtitle">{{ subVertical }}</p>
       <p class="bodytext">{{ getExampleId(portfolio.id, 3) }}</p>
-      <!-- <p class="bodytext">{{ portfolio.features }}</p> -->
-      <!-- <p class="bodytext">{{ portfolio.colour }}</p> -->
-      <!-- <p class="bodytext">{{ portfolio.language }}</p> -->
       <!-- <div class="mockup-identifier" v-if="portfolio.features.indexOf('Mockup') !== -1">Mockup</div> -->
     </a>
   </li>
@@ -18,10 +12,8 @@
 export default {
   name: 'SiteExample',
   props: {
-    portfolio: {
-      type: Object,
-      required: true
-    }
+    portfolio: { type: Object, required: true },
+    subVertical: { type: String, required: true }
   },
   computed: {
     fullPath () {

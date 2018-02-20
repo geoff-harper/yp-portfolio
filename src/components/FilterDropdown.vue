@@ -3,15 +3,15 @@
     <fieldset class="filter-category" v-show="filtersVisible">
       <h3 class="subtitle"><slot>Category</slot></h3>
       <div class="filter-option__container">
-        <label v-for="(category, i) of displayFilters" key="i" :for="getId(i)" class="filter-option__label">
+        <label v-for="category of Object.entries(displayFilters)" :key="category[0]" :for="category[0]" class="filter-option__label">
           <input
             class="filter-option__checkbox"
-            :id="getId(i)"
+            :id="category[0]"
             type="checkbox"
-            :value="category"
+            :value="category[0]"
             @change="emitFilters"
             v-model="checkedCategories">
-          <span class="filter-option__span">{{ category }}</span>
+          <span class="filter-option__span">{{ category[1] }}</span>
         </label>
       </div>
     </fieldset>
@@ -31,7 +31,7 @@ export default {
       required: true
     },
     displayFilters: {
-      type: Array,
+      type: Object,
       required: true
     },
     idText: {
@@ -44,14 +44,6 @@ export default {
   methods: {
     emitFilters () {
       this.$emit('change', this.checkedCategories, this.idText)
-    },
-    getId (i) {
-      return `${this.idText}-${i}`
-    }
-  },
-  watch: {
-    checkedBoxes () {
-      this.checkedCategories = this.checkedBoxes
     }
   },
   data () {
@@ -61,7 +53,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

@@ -3,15 +3,15 @@
     <section class="filter-section">
       <form>
         <FilterDropdown
-          v-model="activeFilters.vertical"
+          v-model="activeFilters.verticals"
           :filtersVisible="filtersVisible"
-          :displayFilters="displayFilters.vertical"
-          idText="vertical">Type of Business</FilterDropdown>
+          :displayFilters="displayFilters.verticals"
+          idText="verticals">Type of Business</FilterDropdown>
         <FilterDropdown
-          v-model="activeFilters.language"
+          v-model="activeFilters.languages"
           :filtersVisible="filtersVisible"
-          :displayFilters="displayFilters.language"
-          idText="language">Language</FilterDropdown>
+          :displayFilters="displayFilters.languages"
+          idText="languages">Language</FilterDropdown>
         <FilterDropdown
           v-model="activeFilters.features"
           :filtersVisible="filtersVisible"
@@ -21,16 +21,19 @@
       <div class="filter-buttons__container">
         <button :class="['filter-toggle', filtersVisible ? 'expanded' : null]" @click="filtersVisible = !filtersVisible">
           <!-- <img src="/uploads/toggle.png" alt="toggle icon" class="filter-toggle__icon"> -->
-          {{ filtersVisible ? "Hide" : "Show" }} filters
+          {{ filtersVisible ? buttonText.hide : buttonText.show }}
         </button>
         <button class="filter-reset" @click="resetFilters">
           <!-- <img src="/uploads/reset.png" alt="reset icon" class="filter-toggle__icon"> -->
-          Reset filters
+          {{ buttonText.reset }}
         </button>
       </div>
     </section>
     <section class="results-section">
-      <SitesList :portfolios="portfolios" :activeFilters="activeFilters"></SitesList>
+      <SitesList
+        :lang="getLang()"
+        :portfolios="portfolios"
+        :activeFilters="activeFilters"></SitesList>
     </section>
   </main>
 </template>
@@ -38,7 +41,7 @@
 <script>
 import FilterDropdown from './components/FilterDropdown'
 import SitesList from './components/SitesList'
-import TextTranslations from './assets/textTranslations'
+import { filterData, buttonData } from './assets/textTranslations'
 
 let currentPortfolioId = 0
 
@@ -49,13 +52,10 @@ export default {
     SitesList
   },
   methods: {
-    updateSites (sites, category) {
-      this.activeFilters[category] = sites
-    },
     resetFilters () {
       this.activeFilters = {
-        vertical: [],
-        language: [],
+        verticals: [],
+        languages: [],
         features: []
       }
     },
@@ -79,21 +79,16 @@ export default {
     getLang () {
       return document.documentElement.getAttribute('lang')
     },
-    setFilterMaps (arr) {
-      const _map = new Map(arr.verticals)
-      _map.forEach((value, key) => {
-        value.subVerticals = new Map(value.subVerticals)
+    getFilterStrings (obj) {
+      let newObj = {}
+      Object.keys(obj).forEach(prop => {
+        newObj[prop] = obj[prop].label || obj[prop]
       })
-      this.filters['verticals'] = _map
-      this.filters['language'] = new Map(arr.language)
-      this.filters['features'] = new Map(arr.features)
+      return newObj
     }
   },
   created () {
     this.shufflePortfolios()
-  },
-  mounted () {
-    this.setFilterMaps(TextTranslations.filters)
   },
   data () {
     return {
@@ -103,10 +98,10 @@ export default {
           name: 'Portfolio Site 1',
           imageFile: 'site1.jpg',
           link: '#',
-          vertical: 'Automotive',
-          specialty: 'Towing',
-          language: 'English',
-          features: ['Video Background'],
+          verticals: 'auto',
+          specialty: 'auto_8',
+          languages: 'english',
+          features: ['videoBackground'],
           colour: 'Green'
         },
         {
@@ -114,10 +109,10 @@ export default {
           name: 'Portfolio Site 2',
           imageFile: 'site2.jpg',
           link: '#',
-          vertical: 'Health, Beauty and Well-Being',
-          specialty: 'Denturist',
-          language: 'English',
-          features: ['Blog', 'Video Background'],
+          verticals: 'health',
+          specialty: 'health_4',
+          languages: 'english',
+          features: ['blog', 'videoBackground'],
           colour: 'Blue'
         },
         {
@@ -125,10 +120,10 @@ export default {
           name: 'Portfolio Site 3',
           imageFile: 'site3.jpg',
           link: '#',
-          vertical: 'Contractors and Construction',
-          specialty: 'Cabinets',
-          language: 'Bilingual',
-          features: ['Catalogue', 'Parallax Images'],
+          verticals: 'construction',
+          specialty: 'construction_5',
+          languages: 'bilingual',
+          features: ['catalogue', 'parallax'],
           colour: 'Multicoloured'
         },
         {
@@ -136,9 +131,9 @@ export default {
           name: 'Portfolio Site 4',
           imageFile: 'site4.jpg',
           link: '#',
-          vertical: 'Health, Beauty and Well-Being',
-          specialty: 'Dentist',
-          language: 'French',
+          verticals: 'health',
+          specialty: 'health_3',
+          languages: 'french',
           features: [],
           colour: 'Red'
         },
@@ -147,10 +142,10 @@ export default {
           name: 'Portfolio Site 5',
           imageFile: 'site5.jpg',
           link: '#',
-          vertical: 'Home and Maintenance',
-          specialty: 'Carpet Cleaning',
-          language: 'English',
-          features: ['Parallax Images'],
+          verticals: 'home',
+          specialty: 'home_28',
+          languages: 'english',
+          features: ['parallax'],
           colour: 'Yellow'
         },
         {
@@ -158,9 +153,9 @@ export default {
           name: 'Portfolio Site 6',
           imageFile: 'site6.jpg',
           link: '#',
-          vertical: 'Health, Beauty and Well-Being',
-          specialty: 'Spa',
-          language: 'English',
+          verticals: 'health',
+          specialty: 'health_13',
+          languages: 'english',
           features: [],
           colour: 'Green'
         },
@@ -169,10 +164,10 @@ export default {
           name: 'Portfolio Site 7',
           imageFile: 'site7.jpg',
           link: '#',
-          vertical: 'Food Services',
-          specialty: 'Banquet Hall',
-          language: 'English',
-          features: ['Parallax Images'],
+          verticals: 'food',
+          specialty: 'food_2',
+          languages: 'english',
+          features: ['parallax'],
           colour: 'Black and White'
         },
         {
@@ -180,30 +175,25 @@ export default {
           name: 'Portfolio Site 8',
           imageFile: 'site8.jpg',
           link: '#',
-          vertical: 'Miscellaneous',
-          specialty: 'Daycare',
-          language: 'French',
-          features: ['Blog', 'Parallax Images'],
+          verticals: 'misc',
+          specialty: 'misc_1',
+          languages: 'french',
+          features: ['blog', 'parallax'],
           colour: 'Multicoloured'
         }
       ],
-      displayFilters: {
-        vertical: ['Automotive', 'Commercial and Industrial Services', 'Contractors and Construction', 'Food Services', 'Health, Beauty and Well-Being', 'Home and Maintenance', 'Law and Finance', 'Miscellaneous'],
-        language: ['English', 'French', 'Bilingual'],
-        features: ['Blog', 'Catalogue', 'Video Background', 'Parallax Images']
-      },
       activeFilters: {
-        vertical: [],
-        language: [],
-        features: []
-      },
-      filters: {
         verticals: [],
-        language: [],
+        languages: [],
         features: []
       },
-      filterTitles: TextTranslations.filters.titles[this.getLang()],
-      buttonText: TextTranslations.buttons[this.getLang()],
+      displayFilters: {
+        verticals: this.getFilterStrings(filterData.verticals[this.getLang()]),
+        languages: this.getFilterStrings(filterData.languages[this.getLang()]),
+        features: this.getFilterStrings(filterData.features[this.getLang()])
+      },
+      filterTitles: filterData.titles[this.getLang()],
+      buttonText: buttonData[this.getLang()],
       filtersVisible: true
     }
   }
